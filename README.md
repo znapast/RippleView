@@ -25,33 +25,34 @@ Code
 -------
 
 After adding the gradle depedency from above you can go to your xml layout and add the following code for a squareprogressbar:
+```xml
+<com.github.znacloud.RippleView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rpv_test"
+    android:layout_width="128dp"
+    android:layout_height="128dp"
+    android:layout_centerInParent="true"
+    app:text="TEST"
+    app:textColor="@color/text_state_color"
+    app:textSize="22sp"
+    app:circleColor="@color/circle_state_color"
+    app:ringColor="@color/ring_state_color"
+    app:bdWidth="4dp"
+    app:bdColor="@color/ring_state_color"
+    app:shadowRadius="2dp"/>
+```
 
-    <com.github.znacloud.RippleView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/rpv_test"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_centerInParent="true"
-            app:text="TEST"
-            app:textColor="@color/text_state_color"
-            app:textSize="22sp"
-            app:circleColor="@color/circle_state_color"
-            app:ringColor="@color/ring_state_color"
-            app:bdWidth="4dp"
-            app:bdColor="@color/ring_state_color"
-            app:shadowRadius="2dp"/>
-    
 To set some basic settings use the following java-code:
-
-    RippleView view = (RippleView)findViewById(R.id.rpv_test);
-    view.setText("TE+ST");
-    view.setTextSize(30);
-    view.setTextColor(getResources().getColorStateList(R.color.text_state_color));
-    view.setBdColor(getResources().getColorStateList(R.color.ring_state_color));
-    view.setBdWidth(6);
-    view.setShadowRadius(16);
-    view.setRingColor(getResources().getColorStateList(R.color.ring_state_color));
-    view.setCircleColor(getResources().getColorStateList(R.color.circle_state_color));
-    
+```java
+RippleView view = (RippleView)findViewById(R.id.rpv_test);
+view.setText("TE+ST");
+view.setTextSize(30);
+view.setTextColor(getResources().getColorStateList(R.color.text_state_color));
+view.setBdColor(getResources().getColorStateList(R.color.ring_state_color));
+view.setBdWidth(6);
+view.setShadowRadius(16);
+view.setRingColor(getResources().getColorStateList(R.color.ring_state_color));
+view.setCircleColor(getResources().getColorStateList(R.color.circle_state_color));
+```
 License
 -------
 
