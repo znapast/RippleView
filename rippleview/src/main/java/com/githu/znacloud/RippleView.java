@@ -306,6 +306,124 @@ public class RippleView extends View {
 
     }
 
+
+    public ColorStateList getRingColor() {
+        return mRingColor;
+    }
+
+    public void setRingColor(ColorStateList pRingColor) {
+        mRingColor = pRingColor;
+        mCurRingColor = mRingColor.getColorForState(getDrawableState(), RING_COLOR);
+        invalidate();
+    }
+
+    public float getRingWidth() {
+        return mRingWidth;
+    }
+
+    public void setRingWidth(float pRingWidth) {
+        mRingWidth = pRingWidth;
+        invalidate();
+    }
+
+    public float getMbdWidth() {
+        return mbdWidth;
+    }
+
+    public void setMbdWidth(float pMbdWidth) {
+        mbdWidth = pMbdWidth;
+        invalidate();
+    }
+
+    public ColorStateList getShadowColor() {
+        return mShadowColor;
+    }
+
+    public void setShadowColor(ColorStateList pShadowColor) {
+        mShadowColor = pShadowColor;
+        mCurShadowColor = mShadowColor.getColorForState(getDrawableState(), Color.GRAY);
+        invalidate();
+    }
+
+    public float getShadowRadius() {
+        return mShadowRadius;
+    }
+
+    public void setShadowRadius(float pShadowRadius) {
+        mShadowRadius = pShadowRadius;
+        invalidate();
+    }
+
+    public float getRippleDistance() {
+        return mRippleDistance;
+    }
+
+    public void setRippleDistance(float pRippleDistance) {
+        mRippleDistance = pRippleDistance;
+        invalidate();
+    }
+
+    public ColorStateList getCircleColor() {
+        return mCircleColor;
+    }
+
+    public void setCircleColor(ColorStateList pCircleColor) {
+        mCircleColor = pCircleColor;
+        mCurCircleColor = mCircleColor.getColorForState(getDrawableState(), CIRCLE_COLOR);
+        invalidate();
+    }
+
+    public ColorStateList getBdColor() {
+        return mBdColor;
+    }
+
+    public void setBdColor(ColorStateList pBdColor) {
+        mBdColor = pBdColor;
+        mCurBdColor = mBdColor.getColorForState(getDrawableState(), BD_COLOR);
+        invalidate();
+    }
+
+    public ColorStateList getTextColor() {
+        return mTextColor;
+    }
+
+    public void setTextColor(ColorStateList pTextColor) {
+        mTextColor = pTextColor;
+        mCurTextColor = mTextColor.getColorForState(getDrawableState(), Color.WHITE);
+        invalidate();
+    }
+
+    public String getText() {
+        return mText;
+    }
+
+    public void setText(String pText) {
+        mText = pText;
+        if (!TextUtils.isEmpty(mText)) {
+            mPaint.setTextSize(mTextSize);
+            mPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            mTextWidth = mPaint.measureText(mText);
+            mTextHeight = mTextSize;
+        }
+        invalidate();
+
+    }
+
+    public float getTextSize() {
+        return mTextSize;
+    }
+
+    public void setTextSize(float pTextSize) {
+        mTextSize = pTextSize;
+        if (!TextUtils.isEmpty(mText)) {
+            mPaint.setTextSize(mTextSize);
+            mPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            mTextWidth = mPaint.measureText(mText);
+            mTextHeight = mTextSize;
+        }
+        invalidate();
+    }
+
     @Override
     protected void onDetachedFromWindow() {
         mTimer.cancel();
