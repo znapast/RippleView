@@ -26,7 +26,7 @@ Code
 
 After adding the gradle depedency from above you can go to your xml layout and add the following code for a squareprogressbar:
 
-    <com.githu.znacloud.RippleView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.github.znacloud.RippleView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/rpv_test"
             android:layout_width="128dp"
             android:layout_height="128dp"
