@@ -5,7 +5,7 @@ android {
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "com.github.znacloud"
+        applicationId "com.github.znacloud.demo"
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 1

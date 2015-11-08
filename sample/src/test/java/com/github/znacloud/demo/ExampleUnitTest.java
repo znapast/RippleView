@@ -1,4 +1,4 @@
-package com.githu.znacloud;
+package com.github.znacloud.demo;
 
 import org.junit.Test;
 

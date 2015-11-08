@@ -1,4 +1,4 @@
-package com.githu.znacloud;
+package com.github.znacloud.demo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

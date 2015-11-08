@@ -5,9 +5,9 @@ Examples
 
 Here are some examples of how these rippleview could look like:
 
-![example](http://a.hiphotos.baidu.com/image/w%3D310/sign=63c6e3cc8101a18bf0eb144eae2e0761/472309f7905298229a1c5c23d1ca7bcb0a46d427.jpg,
-http://c.hiphotos.baidu.com/image/w%3D310/sign=8f56a91d7d899e51788e3c1572a6d990/8718367adab44aed94dfc404b51c8701a08bfbb9.jpg,
-http://a.hiphotos.baidu.com/image/w%3D310/sign=7d0f009a26a446237ecaa363a8237246/5243fbf2b2119313a053855063380cd791238d39.jpg)
+![example](http://a.hiphotos.baidu.com/image/w%3D310/sign=63c6e3cc8101a18bf0eb144eae2e0761/472309f7905298229a1c5c23d1ca7bcb0a46d427.jpg)
+![example](http://c.hiphotos.baidu.com/image/w%3D310/sign=8f56a91d7d899e51788e3c1572a6d990/8718367adab44aed94dfc404b51c8701a08bfbb9.jpg)
+![example](http://a.hiphotos.baidu.com/image/w%3D310/sign=7d0f009a26a446237ecaa363a8237246/5243fbf2b2119313a053855063380cd791238d39.jpg)
 
 #Usage
 

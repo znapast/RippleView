@@ -1,4 +1,4 @@
-package com.github.znacloud;
+package com.github.znacloud.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

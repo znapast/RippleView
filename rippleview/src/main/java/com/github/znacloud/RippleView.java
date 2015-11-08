@@ -1,4 +1,4 @@
-package com.githu.znacloud;
+package com.github.znacloud;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
