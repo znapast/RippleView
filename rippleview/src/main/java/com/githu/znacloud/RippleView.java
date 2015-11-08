@@ -35,7 +35,7 @@ public class RippleView extends View {
 
     private ColorStateList mRingColor = ColorStateList.valueOf(RING_COLOR);
     private float mRingWidth = RING_WIDTH;
-    private float mbdWidth = BD_WIDTH;
+    private float mBdWidth = BD_WIDTH;
 
     private ColorStateList mShadowColor = ColorStateList.valueOf(Color.GRAY);
     private float mShadowRadius = 0f;
@@ -121,7 +121,7 @@ public class RippleView extends View {
         }
 
         mRingWidth = a.getDimension(R.styleable.RippleView_ringWidth, RING_WIDTH);
-        mbdWidth = a.getDimension(R.styleable.RippleView_bdWidth, BD_WIDTH);
+        mBdWidth = a.getDimension(R.styleable.RippleView_bdWidth, BD_WIDTH);
         mShadowRadius = a.getDimension(R.styleable.RippleView_shadowRadius, 0f);
         mRippleDistance = a.getDimension(R.styleable.RippleView_rippleDistance, 0);
         mText = a.getString(R.styleable.RippleView_text);
@@ -215,6 +215,7 @@ public class RippleView extends View {
         //draw ripple
         mPaint.setStrokeWidth(mRingWidth);
         mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setMaskFilter(null);
         int color;
         float distance;
         if (mDuration > 0) {
@@ -244,11 +245,12 @@ public class RippleView extends View {
         }
 
         //draw main border
-        if (mbdWidth > 0) {
+        if (mBdWidth > 0) {
             mPaint.setColor(mCurBdColor);
-            mPaint.setStrokeWidth(mbdWidth);
+            mPaint.setStrokeWidth(mBdWidth);
             mPaint.setStyle(Paint.Style.STROKE);
-            canvas.drawCircle(mWidth / 2f, mHeight / 2F, mRadius - mbdWidth / 2f, mPaint);
+            mPaint.setMaskFilter(null);
+            canvas.drawCircle(mWidth / 2f, mHeight / 2F, mRadius - mBdWidth / 2f, mPaint);
         }
 
         //draw main circle
@@ -257,12 +259,13 @@ public class RippleView extends View {
             mPaint.setStyle(Paint.Style.FILL);
             mPaint.setColor(mCurCircleColor);
             mPaint.setMaskFilter(null);
-            canvas.drawCircle(mWidth / 2f, mHeight / 2F, mRadius - mbdWidth, mPaint);
+            canvas.drawCircle(mWidth / 2f, mHeight / 2F, mRadius - mBdWidth, mPaint);
         }
 
         //draw text
         if (!TextUtils.isEmpty(mText)) {
             mPaint.setColor(mCurTextColor);
+            mPaint.setMaskFilter(null);
             canvas.drawText(mText, (mWidth - mTextWidth) / 2, (mHeight + mTextHeight) / 2, mPaint);
         }
 
@@ -326,12 +329,12 @@ public class RippleView extends View {
         invalidate();
     }
 
-    public float getMbdWidth() {
-        return mbdWidth;
+    public float getBdWidth() {
+        return mBdWidth;
     }
 
-    public void setMbdWidth(float pMbdWidth) {
-        mbdWidth = pMbdWidth;
+    public void setBdWidth(float pBdWidth) {
+        mBdWidth = pBdWidth;
         invalidate();
     }
 
@@ -351,6 +354,9 @@ public class RippleView extends View {
 
     public void setShadowRadius(float pShadowRadius) {
         mShadowRadius = pShadowRadius;
+        if (mShadowRadius > 0) {
+            mBlurFilter = new BlurMaskFilter(mShadowRadius, BlurMaskFilter.Blur.SOLID);
+        }
         invalidate();
     }
 
