@@ -9,6 +9,9 @@ import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -29,6 +32,8 @@ public class RippleView extends View {
     private static final String TAG = "RippleView";
     private static final int BD_WIDTH = 0;
 
+    private StaticLayout mTextLyt;
+
 
     private int mWidth = 0;
     private int mHeight = 0;
@@ -47,6 +52,7 @@ public class RippleView extends View {
     private ColorStateList mTextColor = ColorStateList.valueOf(Color.WHITE);
 
     private Paint mPaint;
+    private TextPaint mTextPaint;
     private float mScale;
     private float mRadius;
 
@@ -128,9 +134,9 @@ public class RippleView extends View {
         mTextSize = a.getDimension(R.styleable.RippleView_textSize, 12 * mScale);
 
         if (!TextUtils.isEmpty(mText)) {
-            mPaint.setTextSize(mTextSize);
-            mPaint.setTypeface(Typeface.DEFAULT_BOLD);
-            mTextWidth = mPaint.measureText(mText);
+            mTextPaint.setTextSize(mTextSize);
+            mTextPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            mTextWidth = mTextPaint.measureText(mText);
             mTextHeight = mTextSize;
         }
 
@@ -144,6 +150,7 @@ public class RippleView extends View {
     private void init(Context context) {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mTextPaint = new TextPaint();
         mScale = context.getResources().getDisplayMetrics().density;
         mEmbossFilter = new EmbossMaskFilter(new float[]{1f, 1f, 1f}, 0.4f, 6f, 10f);
         mBlurFilter = new BlurMaskFilter(2 * mScale, BlurMaskFilter.Blur.SOLID);
@@ -205,6 +212,8 @@ public class RippleView extends View {
         }
         mRadius = Math.min(mWidth, mHeight) / 2f - mRippleDistance;
 
+        mTextLyt = new StaticLayout(mText, mTextPaint, (int) mRadius * 2, Layout.Alignment.ALIGN_CENTER, 1f, 0f, false);
+        mTextHeight = mTextLyt.getHeight();
     }
 
 
@@ -264,9 +273,13 @@ public class RippleView extends View {
 
         //draw text
         if (!TextUtils.isEmpty(mText)) {
-            mPaint.setColor(mCurTextColor);
-            mPaint.setMaskFilter(null);
-            canvas.drawText(mText, (mWidth - mTextWidth) / 2, (mHeight + mTextHeight) / 2, mPaint);
+            mTextPaint.setColor(mCurTextColor);
+//            mTextPaint.setMaskFilter(null);
+//            canvas.drawText(mText, (mWidth - mTextWidth) / 2, (mHeight + mTextHeight) / 2, mPaint);
+//            canvas.save();
+            canvas.translate(mWidth / 2 - mRadius, (mHeight - mTextHeight) / 2);
+            mTextLyt.draw(canvas);
+//            canvas.restore();
         }
 
     }
@@ -409,7 +422,8 @@ public class RippleView extends View {
             mPaint.setTextSize(mTextSize);
             mPaint.setTypeface(Typeface.DEFAULT_BOLD);
             mTextWidth = mPaint.measureText(mText);
-            mTextHeight = mTextSize;
+            mTextLyt = new StaticLayout(mText, mTextPaint, (int) mRadius * 2, Layout.Alignment.ALIGN_CENTER, 1f, 0f, false);
+            mTextHeight = mTextLyt.getHeight();
         }
         invalidate();
 
@@ -425,7 +439,8 @@ public class RippleView extends View {
             mPaint.setTextSize(mTextSize);
             mPaint.setTypeface(Typeface.DEFAULT_BOLD);
             mTextWidth = mPaint.measureText(mText);
-            mTextHeight = mTextSize;
+            mTextLyt = new StaticLayout(mText, mTextPaint, (int) mRadius * 2, Layout.Alignment.ALIGN_CENTER, 1f, 0f, false);
+            mTextHeight = mTextLyt.getHeight();
         }
         invalidate();
     }
