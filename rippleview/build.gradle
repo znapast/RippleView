@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 
+// for maven uploading *********************************************************************
+apply plugin: 'maven'
+apply plugin: 'signing' //使用signing plugin做数字签名
+
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -20,4 +25,66 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+//定义GroupID和Version，ArtefactID会自动使用Project名
+group = 'com.github.znacloud'
+//archivesBaseName = 'sector-progressbar'
+version = '1.0.0'
+
+repositories {
+    mavenCentral();
+}
+
+//artifacts {
+//    archives file('build/outputs/aar/rippleview-release.aar')
+//}
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //为Pom文件做数字签名
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            //指定项目部署到的中央库地址，UserName和Password就是sonatype的登录账号和密码。
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            //构造项目的Pom文件，
+            pom.project {
+                name project.name
+                packaging 'aar'
+                description 'A custom view for button style'
+                url 'https://github.com/znacloud/RippleView'
+
+                scm {
+                    connection 'scm:git:git@github.com:znacloud/RippleView.git'
+                    developerConnection 'scm:git:git@github.com:znacloud/RippleView.git'
+                    url 'git@github.com:znacloud/RippleView.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'znacloud'
+                        name 'StephanZeng'
+                        email 'znacloud@126.com'
+                    }
+                }
+            }
+        }
+    }
 }
